@@ -9,21 +9,7 @@
     <p>Esta es la página PruebaCop. Puedes poner aquí información, imágenes o lo que necesites.</p>
     <a href="index.html">Volver a la página principal</a>
 
-    <!-- Código Chatbase CORREGIDO -->
-    <script>
-      (function() {
-        const onLoad = function() {
-          const script = document.createElement("script");
-          script.src = "https://www.chatbase.co/embed.min.js";
-          script.setAttribute("chatbotId", "TU_ID_DE_CHATBASE"); // <-- Es importante este atributo
-          document.body.appendChild(script);
-        };
-        if (document.readyState === "complete") {
-          onLoad();
-        } else {
-          window.addEventListener("load", onLoad);
-        }
-      })();
-    </script>
+    <!-- Chatbase CORRECTO -->
+    <script src="https://www.chatbase.co/embed.min.js" chatbotId="b8b7faENtH-_ZR5IjvZjA"></script>
   </body>
 </html>
