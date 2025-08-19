@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Página con Chatbase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenido a la página con Chatbase</h1>
+    <p>El chat debería aparecer automáticamente abajo.</p>
+
+    <script>
+    (function(){
+        // Inicializa chatbase si no está definido
+        if(!window.chatbase || window.chatbase("getState") !== "initialized"){
+            window.chatbase = (...args) => {
+                if(!window.chatbase.q){ window.chatbase.q = [] }
+                window.chatbase.q.push(args);
+            };
+            window.chatbase = new Proxy(window.chatbase, {
+                get(target, prop){
+                    if(prop === "q"){ return target.q }
+                    return (...args) => target(prop,...args);
+                }
+            });
+        }
+
+        const onLoad = function(){
+            const script = document.createElement("script");
+            // Reemplaza TU_ID_DE_CHATBASE por el ID que te da Chatbase
+            script.src = "https://www.chatbase.co/embed.min.js?id=TU_ID_DE_CHATBASE";
+            script.async = true;
+
+            script.onload = () => {
+                console.log("Chatbase cargado correctamente");
+                // Aquí puedes inicializar Chatbase si quieres
+                // Ejemplo: window.chatbase("setTheme", "dark");
+            };
+            script.onerror = () => {
+                console.error("No se pudo cargar Chatbase. Verifica tu ID y la URL del script.");
+            };
+
+            document.body.appendChild(script);
+        };
+
+        if(document.readyState === "complete"){
+            onLoad();
+        } else {
+            window.addEventListener("load", onLoad);
+        }
+    })();
+    </script>
+</body>
+</html>
